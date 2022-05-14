@@ -1,6 +1,7 @@
 <?php
 
 include("conexion.php");
+include("variables.php");
 
 $usuario = $_POST["usuario"];
 $password = $_POST["password"];
