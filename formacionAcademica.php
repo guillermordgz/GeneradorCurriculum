@@ -25,10 +25,10 @@
                         <a class="nav-link" href="acercaMi.html">Acerca de mí</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="informacionContacto.html">Información de contacto</a>
+                        <a class="nav-link" href="informacionContacto.php">Información de contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="formacionAcademica.html">Formación académica</a>
+                        <a class="nav-link active" href="formacionAcademica.php">Formación académica</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="experiencia.html">Experiencia</a>
@@ -48,8 +48,8 @@
                     </div>
                     <div class="mb-5">
                         <label for="grado" class="form-label text-light">Grado académico</label>
-                        <input type="text" class="form-control" id="grado"
-                            placeholder="Escriba aquí el grado académico" name="grado">
+                        <input type="text" class="form-control" id="grado" placeholder="Escriba aquí el grado académico"
+                            name="grado">
                     </div>
                     <input type="submit" class="shadow mt-5 btn btn-secondary" value="Crear" />
                 </form>
@@ -62,12 +62,25 @@
                             <th>nombreEscuela</th>
                             <th>grado</th>
                         </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
                     </thead>
+                    <tbody>
+                    <?php
+                        include("php/conexion.php");
+
+                        $archivo = fopen("php/sesion.txt","r");
+                        $valor = fread($archivo, filesize("php/sesion.txt"));
+                        $sesion = intval($valor);
+
+                        $query = "SELECT idGrado, nombreEscuela, grado FROM formacion WHERE idUsuario = '$sesion'";
+                        $resultado = mysqli_query($conn, $query);
+                        while($row = mysqli_fetch_array($resultado)){ ?>
+                            <tr>
+                                <td><?php echo $row['idGrado'] ?></td>
+                                <td><?php echo $row['nombreEscuela'] ?></td>
+                                <td><?php echo $row['grado'] ?></td>
+                            </tr>
+                        <?php }?>
+                    </tbody>
                 </table>
             </div>
         </div>

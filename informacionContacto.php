@@ -25,10 +25,10 @@
                         <a class="nav-link" href="acercaMi.html">Acerca de mí</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="informacionContacto.html">Información de contacto</a>
+                        <a class="nav-link active" href="informacionContacto.php">Información de contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formacionAcademica.html">Formación académica</a>
+                        <a class="nav-link" href="formacionAcademica.php">Formación académica</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="experiencia.html">Experiencia</a>
@@ -51,7 +51,7 @@
                         <input type="text" class="form-control" id="nick"
                             placeholder="Escriba aquí su nombre de usuario" name="nick">
                     </div>
-                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Crear"/>
+                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Crear" />
                 </form>
             </div>
             <div class="col-12 col-md-7 col-lg-8">
@@ -62,12 +62,25 @@
                             <th>nombreRed</th>
                             <th>nombreUsuarioRed</th>
                         </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        include("php/conexion.php");
+
+                        $archivo = fopen("php/sesion.txt","r");
+                        $valor = fread($archivo, filesize("php/sesion.txt"));
+                        $sesion = intval($valor);
+
+                        $query = "SELECT idRedSocial, nombreRed, nombreUsuarioRed FROM contacto WHERE idUsuario = '$sesion' ";
+                        $resultado = mysqli_query($conn, $query);
+                        while($row = mysqli_fetch_array($resultado)){ ?>
+                            <tr>
+                                <td><?php echo $row['idRedSocial'] ?></td>
+                                <td><?php echo $row['nombreRed'] ?></td>
+                                <td><?php echo $row['nombreUsuarioRed'] ?></td>
+                            </tr>
+                        <?php }?>
+                    </tbody>
                 </table>
             </div>
         </div>
