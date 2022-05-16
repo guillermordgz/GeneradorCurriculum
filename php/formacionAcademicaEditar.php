@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información de contacto</title>
+    <title>Formación académica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -19,19 +19,19 @@
             <div class="navbar-collapse collapse" id="secciones">
                 <ul class="nav navbar-nav nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link" href="CV.php">Ver CV</a>
+                        <a class="nav-link" href="../CV.php">Ver CV</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="acercaMi.html">Acerca de mí</a>
+                        <a class="nav-link" href="../acercaMi.html">Acerca de mí</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="informacionContacto.php">Información de contacto</a>
+                        <a class="nav-link" href="../informacionContacto.php">Información de contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formacionAcademica.php">Formación académica</a>
+                        <a class="nav-link active" href="../formacionAcademica.php">Formación académica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="experiencia.php">Experiencia</a>
+                        <a class="nav-link" href="../experiencia.php">Experiencia</a>
                     </li>
                 </ul>
             </div>
@@ -40,60 +40,54 @@
     <div id="container">
         <div class="row p-3 m-3">
             <div class="col-12 col-md-5 col-lg-4">
-                <form action="php/infoContactCrear.php" method="post">
+                <form action="editarGrado.php?idGrado=<?php echo $_GET['idGrado']?>" method="post">
                     <div class="mb-5">
-                        <label for="redSocial" class="mt-5 form-label text-light">Nombre de la red social</label>
-                        <input type="text" class="form-control" id="redSocial"
-                            placeholder="Escriba aquí el nombre de la red social" name="redSocial">
+                        <label for="escuela" class="mt-5 form-label text-light">Escuela</label>
+                        <input type="text" class="form-control" id="escuela"
+                            placeholder="Escriba aquí el nombre de la escuela" name="escuela">
                     </div>
                     <div class="mb-5">
-                        <label for="nick" class="form-label text-light">Nombre de usuario</label>
-                        <input type="text" class="form-control" id="nick"
-                            placeholder="Escriba aquí su nombre de usuario" name="nick">
+                        <label for="grado" class="form-label text-light">Grado académico</label>
+                        <input type="text" class="form-control" id="grado" placeholder="Escriba aquí el grado académico"
+                            name="grado">
                     </div>
-                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Crear" />
+                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Guardar cambios" />
                 </form>
             </div>
             <div class="col-12 col-md-7 col-lg-8 mt-5">
+                <h2 class="text-light">Usted está editando:</h2>
                 <table class="table table-dark table-bordered table-sm">
                     <thead class="table-striped">
                         <tr>
-                            <th>idRedSocial</th>
-                            <th>nombreRed</th>
-                            <th>nombreUsuarioRed</th>
+                            <th>idGrado</th>
+                            <th>nombreEscuela</th>
+                            <th>grado</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                        include("php/conexion.php");
+                        include("conexion.php");
 
-                        $archivo = fopen("php/sesion.txt","r");
-                        $valor = fread($archivo, filesize("php/sesion.txt"));
-                        $sesion = intval($valor);
+                        $idGrado = $_GET['idGrado'];
 
-                        $select = "SELECT idRedSocial, nombreRed, nombreUsuarioRed FROM contacto WHERE idUsuario = $sesion";
+                        $select = "SELECT idGrado, nombreEscuela, grado FROM formacion WHERE idGrado = $idGrado";
                         $resultado = mysqli_query($conn, $select);
                         while($row = mysqli_fetch_array($resultado)){
                     ?>
                             <tr>
                                 <td>
-                                    <?php echo $row['idRedSocial'] ?>
+                                    <?php echo $row['idGrado'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['nombreRed'] ?>
+                                    <?php echo $row['nombreEscuela'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['nombreUsuarioRed'] ?>
-                                </td>
-                                <td>
-                                    <a class="link-danger" href="php/eliminarContacto.php?idRedSocial=<?php echo $row['idRedSocial'] ?>">Eliminar</a>
-                                    <a class="link-secondary" href="php/informacionContactoEditar.php?idRedSocial=<?php echo $row['idRedSocial'] ?>">Editar</a>
+                                    <?php echo $row['grado'] ?>
                                 </td>
                             </tr>
                         <?php }?>
                     </tbody>
                 </table>
-                
             </div>
         </div>
     </div>

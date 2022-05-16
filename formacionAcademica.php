@@ -19,7 +19,7 @@
             <div class="navbar-collapse collapse" id="secciones">
                 <ul class="nav navbar-nav nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link" href="CV.html">Ver CV</a>
+                        <a class="nav-link" href="CV.php">Ver CV</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="acercaMi.html">Acerca de mí</a>
@@ -31,7 +31,7 @@
                         <a class="nav-link active" href="formacionAcademica.php">Formación académica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="experiencia.html">Experiencia</a>
+                        <a class="nav-link" href="experiencia.php">Experiencia</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
                     <input type="submit" class="shadow mt-5 btn btn-secondary" value="Crear" />
                 </form>
             </div>
-            <div class="col-12 col-md-7 col-lg-8">
+            <div class="col-12 col-md-7 col-lg-8 mt-5">
                 <table class="table table-dark table-bordered table-sm">
                     <thead class="table-striped">
                         <tr>
@@ -86,7 +86,8 @@
                                     <?php echo $row['grado'] ?>
                                 </td>
                                 <td>
-                                    <a href="php/eliminarGrado.php?idGrado=<?php echo $row['idGrado'] ?>">Eliminar</a>
+                                    <a class="link-danger" href="php/eliminarGrado.php?idGrado=<?php echo $row['idGrado'] ?>">Eliminar</a>
+                                    <a class="link-secondary" href="php/formacionAcademicaEditar.php?idGrado=<?php echo $row['idGrado'] ?>">Editar</a>
                                 </td>
                             </tr>
                         <?php }?>

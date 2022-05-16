@@ -19,19 +19,19 @@
             <div class="navbar-collapse collapse" id="secciones">
                 <ul class="nav navbar-nav nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link" href="CV.php">Ver CV</a>
+                        <a class="nav-link" href="../CV.php">Ver CV</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="acercaMi.html">Acerca de mí</a>
+                        <a class="nav-link" href="../acercaMi.html">Acerca de mí</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="informacionContacto.php">Información de contacto</a>
+                        <a class="nav-link active" href="../informacionContacto.php">Información de contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formacionAcademica.php">Formación académica</a>
+                        <a class="nav-link" href="../formacionAcademica.php">Formación académica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="experiencia.php">Experiencia</a>
+                        <a class="nav-link" href="../experiencia.php">Experiencia</a>
                     </li>
                 </ul>
             </div>
@@ -40,7 +40,7 @@
     <div id="container">
         <div class="row p-3 m-3">
             <div class="col-12 col-md-5 col-lg-4">
-                <form action="php/infoContactCrear.php" method="post">
+                <form action="editarContacto.php?idRedSocial=<?php echo $_GET['idRedSocial'] ?>" method="post">
                     <div class="mb-5">
                         <label for="redSocial" class="mt-5 form-label text-light">Nombre de la red social</label>
                         <input type="text" class="form-control" id="redSocial"
@@ -51,10 +51,11 @@
                         <input type="text" class="form-control" id="nick"
                             placeholder="Escriba aquí su nombre de usuario" name="nick">
                     </div>
-                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Crear" />
+                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Guardar cambios"/>
                 </form>
             </div>
             <div class="col-12 col-md-7 col-lg-8 mt-5">
+                <h2 class="text-light">Usted está editando:</h2>
                 <table class="table table-dark table-bordered table-sm">
                     <thead class="table-striped">
                         <tr>
@@ -65,13 +66,11 @@
                     </thead>
                     <tbody>
                     <?php
-                        include("php/conexion.php");
+                        include("conexion.php");
 
-                        $archivo = fopen("php/sesion.txt","r");
-                        $valor = fread($archivo, filesize("php/sesion.txt"));
-                        $sesion = intval($valor);
+                        $idRedSocial = $_GET['idRedSocial'];
 
-                        $select = "SELECT idRedSocial, nombreRed, nombreUsuarioRed FROM contacto WHERE idUsuario = $sesion";
+                        $select = "SELECT idRedSocial, nombreRed, nombreUsuarioRed FROM contacto WHERE idRedSocial = $idRedSocial";
                         $resultado = mysqli_query($conn, $select);
                         while($row = mysqli_fetch_array($resultado)){
                     ?>
@@ -84,10 +83,6 @@
                                 </td>
                                 <td>
                                     <?php echo $row['nombreUsuarioRed'] ?>
-                                </td>
-                                <td>
-                                    <a class="link-danger" href="php/eliminarContacto.php?idRedSocial=<?php echo $row['idRedSocial'] ?>">Eliminar</a>
-                                    <a class="link-secondary" href="php/informacionContactoEditar.php?idRedSocial=<?php echo $row['idRedSocial'] ?>">Editar</a>
                                 </td>
                             </tr>
                         <?php }?>
