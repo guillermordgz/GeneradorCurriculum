@@ -64,24 +64,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
+                    <?php
                         include("php/conexion.php");
 
                         $archivo = fopen("php/sesion.txt","r");
                         $valor = fread($archivo, filesize("php/sesion.txt"));
                         $sesion = intval($valor);
 
-                        $query = "SELECT idRedSocial, nombreRed, nombreUsuarioRed FROM contacto WHERE idUsuario = '$sesion' ";
-                        $resultado = mysqli_query($conn, $query);
-                        while($row = mysqli_fetch_array($resultado)){ ?>
+                        $select = "SELECT idRedSocial, nombreRed, nombreUsuarioRed FROM contacto WHERE idUsuario = $sesion";
+                        $resultado = mysqli_query($conn, $select);
+                        while($row = mysqli_fetch_array($resultado)){
+                    ?>
                             <tr>
-                                <td><?php echo $row['idRedSocial'] ?></td>
-                                <td><?php echo $row['nombreRed'] ?></td>
-                                <td><?php echo $row['nombreUsuarioRed'] ?></td>
+                                <td>
+                                    <?php echo $row['idRedSocial'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['nombreRed'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['nombreUsuarioRed'] ?>
+                                </td>
+                                <td>
+                                    <a href="php/eliminarContacto.php?idRedSocial=<?php echo $row['idRedSocial'] ?>">Eliminar</a>
+                                </td>
                             </tr>
                         <?php }?>
                     </tbody>
                 </table>
+                
             </div>
         </div>
     </div>

@@ -71,13 +71,23 @@
                         $valor = fread($archivo, filesize("php/sesion.txt"));
                         $sesion = intval($valor);
 
-                        $query = "SELECT idGrado, nombreEscuela, grado FROM formacion WHERE idUsuario = '$sesion'";
-                        $resultado = mysqli_query($conn, $query);
-                        while($row = mysqli_fetch_array($resultado)){ ?>
+                        $select = "SELECT idGrado, nombreEscuela, grado FROM formacion WHERE idUsuario = $sesion";
+                        $resultado = mysqli_query($conn, $select);
+                        while($row = mysqli_fetch_array($resultado)){
+                    ?>
                             <tr>
-                                <td><?php echo $row['idGrado'] ?></td>
-                                <td><?php echo $row['nombreEscuela'] ?></td>
-                                <td><?php echo $row['grado'] ?></td>
+                                <td>
+                                    <?php echo $row['idGrado'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['nombreEscuela'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['grado'] ?>
+                                </td>
+                                <td>
+                                    <a href="php/eliminarGrado.php?idGrado=<?php echo $row['idGrado'] ?>">Eliminar</a>
+                                </td>
                             </tr>
                         <?php }?>
                     </tbody>
