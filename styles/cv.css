@@ -1,0 +1,7 @@
+.p-5, .alert{
+    text-align: center;
+}
+
+.alert button{
+    float: right;
+}
