@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formación académica</title>
+    <title>Experiencia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -28,10 +28,10 @@
                         <a class="nav-link" href="informacionContacto.php">Información de contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="formacionAcademica.php">Formación académica</a>
+                        <a class="nav-link" href="formacionAcademica.php">Formación académica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="experiencia.php">Experiencia</a>
+                        <a class="nav-link active" href="experiencia.php">Experiencia</a>
                     </li>
                 </ul>
             </div>
@@ -39,28 +39,41 @@
     </nav>
     <div id="container">
         <div class="row p-3 m-3">
-            <div class="col-12 col-md-5 col-lg-4">
-                <form action="php/crearFormacion.php" method="post">
+            <div class="col-12 col-lg-4">
+                <form action="php/crearExperiencia.php" method="post">
                     <div class="mb-5">
-                        <label for="escuela" class="mt-5 form-label text-light">Escuela</label>
-                        <input type="text" class="form-control" id="escuela"
-                            placeholder="Escriba aquí el nombre de la escuela" name="escuela">
+                        <label for="empresa" class="mt-5 form-label text-light">Empresa</label>
+                        <input type="text" class="form-control" id="empresa"
+                            placeholder="Escriba aquí el nombre de la empresa" name="nombreEmpresa">
                     </div>
                     <div class="mb-5">
-                        <label for="grado" class="form-label text-light">Grado académico</label>
-                        <input type="text" class="form-control" id="grado" placeholder="Escriba aquí el grado académico"
-                            name="grado">
+                        <label for="puesto" class="form-label text-light">Puesto</label>
+                        <input type="text" class="form-control" id="puesto" placeholder="Escriba aquí el puesto desempeñado"
+                            name="puesto">
+                    </div>
+                    <div class="mb-5">
+                        <label for="fechaInicio" class="form-label text-light">Fecha de inicio</label>
+                        <input type="date" class="form-control" id="fechaInicio"
+                            name="fechaInicio">
+                    </div>
+                    <div class="mb-5">
+                        <label for="fechaFin" class="form-label text-light">Fecha de fin</label>
+                        <input type="date" class="form-control" id="fechaFin"
+                            name="fechaFin">
                     </div>
                     <input type="submit" class="shadow mt-5 btn btn-secondary" value="Crear" />
                 </form>
             </div>
-            <div class="col-12 col-md-7 col-lg-8 mt-5">
+            <div class="col-12 col-lg-8 mt-5">
                 <table class="table table-dark table-bordered table-sm">
                     <thead class="table-striped">
                         <tr>
-                            <th>idGrado</th>
-                            <th>nombreEscuela</th>
-                            <th>grado</th>
+                            <th>idExperiencia</th>
+                            <th>nombreEmpresa</th>
+                            <th>puesto</th>
+                            <th>fechaInicio</th>
+                            <th>fechaFin</th>
+                            <th>duracion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,25 +84,34 @@
                         $valor = fread($archivo, filesize("php/sesion.txt"));
                         $sesion = intval($valor);
 
-                        $select = "SELECT idGrado, nombreEscuela, grado FROM formacion WHERE idUsuario = $sesion";
+                        $select = "SELECT idExperiencia, nombreEmpresa, puesto, fechaInicio, fechaFin, duracion FROM experiencia WHERE idUsuario = $sesion";
                         $resultado = mysqli_query($conn, $select);
                         while($row = mysqli_fetch_array($resultado)){
                     ?>
                             <tr>
                                 <td>
-                                    <?php echo $row['idGrado'] ?>
+                                    <?php echo $row['idExperiencia'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['nombreEscuela'] ?>
+                                    <?php echo $row['nombreEmpresa'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['grado'] ?>
+                                    <?php echo $row['puesto'] ?>
                                 </td>
                                 <td>
-                                    <a class="link-danger" href="php/eliminarGrado.php?idGrado=<?php echo $row['idGrado'] ?>">Eliminar</a>
+                                    <?php echo $row['fechaInicio'] ?>
                                 </td>
                                 <td>
-                                    <a class="link-secondary" href="php/formacionAcademicaEditar.php?idGrado=<?php echo $row['idGrado'] ?>">Editar</a>
+                                    <?php echo $row['fechaFin'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['duracion'] ?>
+                                </td>
+                                <td>
+                                    <a class="link-danger" href="php/eliminarExperiencia.php?idExperiencia=<?php echo $row['idExperiencia'] ?>">Eliminar</a>
+                                </td>
+                                <td>
+                                    <a class="link-secondary" href="php/experienciaEditar.php?idExperiencia=<?php echo $row['idExperiencia'] ?>">Editar</a>
                                 </td>
                             </tr>
                         <?php }?>

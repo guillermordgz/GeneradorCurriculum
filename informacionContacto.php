@@ -87,6 +87,8 @@
                                 </td>
                                 <td>
                                     <a class="link-danger" href="php/eliminarContacto.php?idRedSocial=<?php echo $row['idRedSocial'] ?>">Eliminar</a>
+                                </td>
+                                <td>
                                     <a class="link-secondary" href="php/informacionContactoEditar.php?idRedSocial=<?php echo $row['idRedSocial'] ?>">Editar</a>
                                 </td>
                             </tr>
