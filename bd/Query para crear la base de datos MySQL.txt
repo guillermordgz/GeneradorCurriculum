@@ -1,0 +1,42 @@
+CREATE DATABASE CV;
+
+CREATE TABLE Usuarios(
+	idUsuario INT PRIMARY AUTO_INCREMENT NOT NULL,
+	NombreCompleto VARCHAR(100),
+	descripcion TEXT,
+	correoElectronico VARCHAR(100) NOT NULL,
+	contrasena VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Contacto(
+	idRedSocial INT PRIMARY AUTO_INCREMENT NOT NULL,
+	nombreRed VARCHAR(20) NOT NULL,
+	nombreUsuarioRed VARCHAR(100) NOT NULL,
+	idUsuario INT NOT NULL
+);
+
+CREATE TABLE Formacion(
+	idGrado INT PRIMARY AUTO_INCREMENT NOT NULL,
+	nombreEscuela VARCHAR(200) NOT NULL,
+	grado VARCHAR(200) NOT NULL,
+	idUsuario INT NOT NULL
+);
+
+CREATE TABLE Experiencia(
+	idExperiencia INT PRIMARY AUTO_INCREMENT NOT NULL,
+	nombreEmpresa VARCHAR(200) NOT NULL,
+	puesto VARCHAR(150) NOT NULL,
+	fechaInicio DATE NOT NULL,
+	fechaFin DATE NOT NULL,
+	duracion INT NOT NULL,
+	idUsuario INT NOT NULL
+);
+
+ALTER TABLE Contacto
+ADD FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario);
+
+ALTER TABLE Formacion
+ADD FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario);
+
+ALTER TABLE Experiencia
+ADD FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario);
