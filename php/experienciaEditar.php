@@ -61,7 +61,7 @@
                         <input type="date" class="form-control" id="fechaFin"
                             name="fechaFin">
                     </div>
-                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Guardar cambios" />
+                    <input type="submit" onclick="modificado()" class="shadow mt-5 btn btn-secondary" value="Guardar cambios" />
                 </form>
             </div>
             <div class="col-12 col-lg-8 mt-5">
@@ -116,6 +116,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="../js/editarExperiencia.js"></script>
 </body>
 
 </html>

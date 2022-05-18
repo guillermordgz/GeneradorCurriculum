@@ -51,7 +51,7 @@
                         <input type="text" class="form-control" id="nick"
                             placeholder="Escriba aquí su nombre de usuario" name="nick">
                     </div>
-                    <input type="submit" class="shadow mt-5 btn btn-secondary" value="Guardar cambios"/>
+                    <input type="submit" onclick="modificado()" class="shadow mt-5 btn btn-secondary" value="Guardar cambios"/>
                 </form>
             </div>
             <div class="col-12 col-md-7 col-lg-8 mt-5">
@@ -95,6 +95,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="../js/editarContacto.js"></script>
 </body>
 
 </html>
