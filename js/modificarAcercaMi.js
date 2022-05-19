@@ -1,11 +1,7 @@
-var nombre = document.getElementById('nombre');
-var email = document.getElementById('email');
 var enviar = document.addEventListener('submit', creado);
 
 function creado(enviar){
-    let nombreVal = nombre.value;
-    let emailVal = email.value;
-    if (nombreVal == '' || emailVal =='' ) {
+    if ($("#nombre").val() == '' || $("#email").val() =='' ) {
         enviar.preventDefault();
         enviar.stopPropagation();
         alert('Por favor rellene los campos');
