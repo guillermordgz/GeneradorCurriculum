@@ -138,7 +138,7 @@
             </div>
             <div class="alert alert-info show fixed-bottom" role="alert">
             <button class="btn-close" data-bs-dismiss="alert"></button>
-                Es usted <?php echo $datosPersonales['NombreCompleto']?>?, de click <a href="index.html" class="alert-link" target="_blanck">aquí</a> para modificar su CV.
+                ¿Es usted <?php echo $datosPersonales['NombreCompleto']?>?, de click <a href="index.html" class="alert-link" target="_blanck">aquí</a> para modificar su CV.
               </div>
         </div>
     </body>
